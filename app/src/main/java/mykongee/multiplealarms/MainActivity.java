@@ -54,18 +54,46 @@ public class MainActivity extends AppCompatActivity implements
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(AlarmClock.ACTION_SET_ALARM);
-                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-                intent.putExtra(AlarmClock.EXTRA_HOUR, 23);
-                intent.putExtra(AlarmClock.EXTRA_MINUTES, 53);
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setAction(AlarmClock.ACTION_SET_ALARM);
+//                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+//                intent.putExtra(AlarmClock.EXTRA_HOUR, 23);
+//                intent.putExtra(AlarmClock.EXTRA_MINUTES, 53);
+//                startActivity(intent);
+                sendAlarm();
             }
         });
 
         update();
 
     }
+
+    private void sendAlarm(){
+        Intent intent = new Intent();
+        intent.setAction(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, 0);
+        startActivity(intent);
+        Log.d(LOG_TAG, "First intent sent");
+
+        Intent intent2 = new Intent();
+        intent2.setAction(AlarmClock.ACTION_SHOW_ALARMS);
+//        intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+//        intent2.putExtra(AlarmClock.EXTRA_HOUR, 6);
+//        intent2.putExtra(AlarmClock.EXTRA_MINUTES, 5);
+        startActivity(intent2);
+        Log.d(LOG_TAG, "After second intent's startActivity()");
+    };
+
+    private void sendAlarmTwo(){
+        Intent intent = new Intent();
+        intent.setAction(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, 5);
+        startActivity(intent);
+    };
 
     private void update() {
         dateView.setText(dateFormat.format(calendar.getTime()));
