@@ -50,15 +50,15 @@ public class MainActivity extends AppCompatActivity implements
         timeView = (TextView) findViewById(R.id.lblTime);
         Button alarmButton = (Button) findViewById(R.id.btnAlarm);
 
-        // Set button click to request the API to turn on the light at a certain date and time
-        // And to set an alarm with the main alarm app.
+        // Set an alarm with the main alarm app.
         alarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v(LOG_TAG, queryFormatDate + " " + queryFormatTime);
                 Intent intent = new Intent();
                 intent.setAction(AlarmClock.ACTION_SET_ALARM);
                 intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+                intent.putExtra(AlarmClock.EXTRA_HOUR, 23);
+                intent.putExtra(AlarmClock.EXTRA_MINUTES, 53);
                 startActivity(intent);
             }
         });
