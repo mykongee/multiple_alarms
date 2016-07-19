@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements
 //        intent2.putExtra(AlarmClock.EXTRA_MINUTES, 5);
         startActivity(intent2);
         Log.d(LOG_TAG, "After second intent's startActivity()");
+        // Try using intent flags 
+        // FLAG_ACTIVITY_NEW_TASK
     };
 
     private void sendAlarmTwo(){
