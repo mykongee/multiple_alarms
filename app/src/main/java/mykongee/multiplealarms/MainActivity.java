@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements
         Log.d(LOG_TAG, "After second intent's startActivity()");
         // Try using intent flags 
         // FLAG_ACTIVITY_NEW_TASK
+        // FLAG_ACTIVITY_CLEAR_TASK
     };
 
     private void sendAlarmTwo(){
