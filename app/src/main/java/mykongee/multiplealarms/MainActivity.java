@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void sendAlarm(){
         Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setAction(AlarmClock.ACTION_SET_ALARM);
         intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
         intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
@@ -78,16 +79,14 @@ public class MainActivity extends AppCompatActivity implements
         Log.d(LOG_TAG, "First intent sent");
 
         Intent intent2 = new Intent();
-        intent2.setAction(AlarmClock.ACTION_SHOW_ALARMS);
-//        intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-//        intent2.putExtra(AlarmClock.EXTRA_HOUR, 6);
-//        intent2.putExtra(AlarmClock.EXTRA_MINUTES, 5);
+        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent2.setAction(AlarmClock.ACTION_SET_ALARM);
+        intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        intent2.putExtra(AlarmClock.EXTRA_HOUR, 6);
+        intent2.putExtra(AlarmClock.EXTRA_MINUTES, 5);
         startActivity(intent2);
         Log.d(LOG_TAG, "After second intent's startActivity()");
-        // Try using intent flags 
-        // FLAG_ACTIVITY_NEW_TASK
-        // FLAG_ACTIVITY_CLEAR_TASK
-    };
+    }
 
     private void sendAlarmTwo(){
         Intent intent = new Intent();
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements
         intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
         intent.putExtra(AlarmClock.EXTRA_MINUTES, 5);
         startActivity(intent);
-    };
+    }
 
     private void update() {
         dateView.setText(dateFormat.format(calendar.getTime()));
