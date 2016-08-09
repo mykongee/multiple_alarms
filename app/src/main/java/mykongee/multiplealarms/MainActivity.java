@@ -88,13 +88,14 @@ public class MainActivity extends AppCompatActivity implements
         Log.d(LOG_TAG, "After second intent's startActivity()");
     }
 
-    private void sendAlarmTwo(){
-        Intent intent = new Intent();
-        intent.setAction(AlarmClock.ACTION_SET_ALARM);
-        intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-        intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
-        intent.putExtra(AlarmClock.EXTRA_MINUTES, 5);
-        startActivity(intent);
+    private void setAlarms(int numberofAlarms, int startDate, int endDate, int startTime,
+                           int endTime){
+        // set [numberOfAlarms] alarms based on start/end date and start/end time
+        for (int i = 0; i < numberofAlarms; i++){
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            // more logic
+        }
     }
 
     private void update() {
