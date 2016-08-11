@@ -19,15 +19,29 @@
         style="@style/DTP.Label"/>
 
     <Button
-        android:id="@+id/btnDatePicker"
-        android:text="@string/date_picker"
+        android:id="@+id/btnDatePickerStart"
+        android:text="@string/date_picker_start"
         style="@style/DTP.Button"/>
 
     <Button
-        android:id="@+id/btnTimePicker"
-        android:text="@string/time_picker"
+        android:id="@+id/btnTimePickerStart"
+        android:text="@string/time_picker_start"
         android:layout_marginTop="16dp"
         style="@style/DTP.Button"/>
+
+    <Button
+        android:id="@+id/btnDatePickerEnd"
+        android:text="@string/date_picker_end"
+        android:layout_marginTop="16dp"
+        style="@style/DTP.Button"
+        />
+
+    <Button
+        android:id="@+id/btnTimePickerEnd"
+        android:text="@string/time_picker_end"
+        android:layout_marginTop="16dp"
+        style="@style/DTP.Button"
+        />
 
     <Button
         android:id="@+id/btnAlarm"

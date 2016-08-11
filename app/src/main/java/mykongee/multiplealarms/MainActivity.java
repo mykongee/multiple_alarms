@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements
     private TextView dateView;
     private TextView timeView;
     private Calendar calendar;
+    private Calendar startCalendar;
+    private Calendar endCalendar;
     private DateFormat dateFormat;
     private SimpleDateFormat simpleDateFormat;
     private String queryFormatDate;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startCalendar = Calendar.getInstance();
+        endCalendar = Calendar.getInstance();
 
         calendar = Calendar.getInstance();
         dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
@@ -105,13 +110,13 @@ public class MainActivity extends AppCompatActivity implements
 
     public void onClick(View v){
         switch (v.getId()) {
-            case R.id.btnDatePicker:
+            case R.id.btnDatePickerStart:
                 DatePickerDialog.newInstance(this,
                         calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).
                         show(getFragmentManager(), "datePicker");
                 break;
-            case R.id.btnTimePicker:
+            case R.id.btnTimePickerStart:
                 TimePickerDialog.newInstance(this,
                         calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
                         true).show(getFragmentManager(), "timePicker");
