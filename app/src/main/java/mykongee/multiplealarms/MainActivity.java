@@ -132,14 +132,15 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-//        startCalendar.set(year, monthOfYear, dayOfMonth);
+        startCalendar.set(year, monthOfYear, dayOfMonth);
+        // TODO: Need to find a way to set both calendars without overriding the other
         update();
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-//        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-//        startCalendar.set(Calendar.MINUTE, minute);
+        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        startCalendar.set(Calendar.MINUTE, minute);
         update();
     }
 
