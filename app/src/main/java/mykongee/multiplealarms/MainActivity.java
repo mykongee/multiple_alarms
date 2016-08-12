@@ -26,30 +26,26 @@ public class MainActivity extends AppCompatActivity implements
 
     private TextView dateView;
     private TextView timeView;
-    private Calendar calendar;
     private Calendar startCalendar;
     private Calendar endCalendar;
     private DateFormat dateFormat;
     private SimpleDateFormat simpleDateFormat;
     private String queryFormatDate;
-    private String queryFormatTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         startCalendar = Calendar.getInstance();
         endCalendar = Calendar.getInstance();
 
-        calendar = Calendar.getInstance();
         dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
         simpleDateFormat = new SimpleDateFormat(TIME_PATTERN, Locale.getDefault());
 
         // Initialize these values as current date and time
         // To prevent error with empty query parameters
-        queryFormatTime = dateFormat.format(calendar.getTime());
-        queryFormatDate = simpleDateFormat.format(calendar.getTime());
 
         dateView = (TextView) findViewById(R.id.lblDate);
         timeView = (TextView) findViewById(R.id.lblTime);
@@ -65,7 +61,9 @@ public class MainActivity extends AppCompatActivity implements
 //                intent.putExtra(AlarmClock.EXTRA_HOUR, 23);
 //                intent.putExtra(AlarmClock.EXTRA_MINUTES, 53);
 //                startActivity(intent);
-                sendAlarm();
+//                sendAlarm();
+                Log.v("Calendar date: ", startCalendar.getTime().toString());
+                Log.v("Calendar time: ", Long.toString(startCalendar.getTimeInMillis()));
             }
         });
 
@@ -104,41 +102,44 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void update() {
-        dateView.setText(dateFormat.format(calendar.getTime()));
-        timeView.setText(simpleDateFormat.format(calendar.getTime()));
+        dateView.setText(dateFormat.format(startCalendar.getTime()));
+        timeView.setText(simpleDateFormat.format(startCalendar.getTime()));
     }
 
     public void onClick(View v){
         switch (v.getId()) {
+            // Bring up Date Picker and Time Picker Dialog to set time and date
             case R.id.btnDatePickerStart:
+                TimePickerDialog.newInstance(this,
+                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
+                        true).show(getFragmentManager(), "timePicker");
                 DatePickerDialog.newInstance(this,
-                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)).
+                        startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
+                        startCalendar.get(Calendar.DAY_OF_MONTH)).
                         show(getFragmentManager(), "datePicker");
                 break;
-            case R.id.btnTimePickerStart:
+            case R.id.btnDatePickerEnd:
                 TimePickerDialog.newInstance(this,
-                        calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
                         true).show(getFragmentManager(), "timePicker");
+                DatePickerDialog.newInstance(this,
+                        startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
+                        startCalendar.get(Calendar.DAY_OF_MONTH)).
+                        show(getFragmentManager(), "datePicker");
                 break;
         }
     }
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-        calendar.set(year, monthOfYear, dayOfMonth);
-        // Store String-formatted date for API query
-        queryFormatDate = Integer.toString(year) + "-" + Integer.toString(monthOfYear + 1) +
-                "-" + Integer.toString(dayOfMonth);
+        startCalendar.set(year, monthOfYear, dayOfMonth);
         update();
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        calendar.set(Calendar.MINUTE, minute);
-        // Store String-formatted time for API query
-        queryFormatTime = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
+        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        startCalendar.set(Calendar.MINUTE, minute);
         update();
     }
 

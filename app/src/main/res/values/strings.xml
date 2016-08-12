@@ -3,10 +3,8 @@
     <string name="action_settings">Settings</string>
 
     <!--DateTime Activity-->
-    <string name="date_picker_start">Set Start Date</string>
-    <string name="time_picker_start">Set Start Time</string>
-    <string name="date_picker_end">Set End Date</string>
-    <string name="time_picker_end">Set End Time</string>
+    <string name="time_picker_start">Set Lower Interval</string>
+    <string name="time_picker_end">Set Upper Interval</string>
     <string name="alarm">Set Alarms</string>
 
 </resources>
