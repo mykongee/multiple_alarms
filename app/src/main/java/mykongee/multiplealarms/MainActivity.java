@@ -120,11 +120,11 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.btnDatePickerEnd:
                 TimePickerDialog.newInstance(this,
-                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
+                        endCalendar.get(Calendar.HOUR_OF_DAY), endCalendar.get(Calendar.MINUTE),
                         true).show(getFragmentManager(), "timePicker");
                 DatePickerDialog.newInstance(this,
-                        startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
-                        startCalendar.get(Calendar.DAY_OF_MONTH)).
+                        endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
+                        endCalendar.get(Calendar.DAY_OF_MONTH)).
                         show(getFragmentManager(), "datePicker");
                 break;
         }
@@ -132,14 +132,14 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-        startCalendar.set(year, monthOfYear, dayOfMonth);
+//        startCalendar.set(year, monthOfYear, dayOfMonth);
         update();
     }
 
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        startCalendar.set(Calendar.MINUTE, minute);
+//        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//        startCalendar.set(Calendar.MINUTE, minute);
         update();
     }
 
