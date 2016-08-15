@@ -7,20 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.android.datetimepicker.date.DatePickerDialog;
-import com.android.datetimepicker.time.TimePickerDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements
-        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
-        View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
+//        implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
+//        View.OnClickListener{
 
     private static final String TIME_PATTERN = "HH:mm";
     private final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -128,27 +126,28 @@ public class MainActivity extends AppCompatActivity implements
                 }, mYear, mMonth, mDay);
 
                 //TODO: Use separate instances of DatePickerDialog to set different calendars
-                TimePickerDialog.newInstance(this,
-                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
-                        true).show(getFragmentManager(), "timePicker");
-                DatePickerDialog.newInstance(this,
-                        startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
-                        startCalendar.get(Calendar.DAY_OF_MONTH)).
-                        show(getFragmentManager(), "datePicker");
+//                TimePickerDialog.newInstance(this,
+//                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
+//                        true).show(getFragmentManager(), "timePicker");
+//                DatePickerDialog.newInstance(this,
+//                        startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
+//                        startCalendar.get(Calendar.DAY_OF_MONTH)).
+//                        show(getFragmentManager(), "datePicker");
 
                 break;
             case R.id.btnDatePickerEnd:
-                TimePickerDialog.newInstance(this,
-                        endCalendar.get(Calendar.HOUR_OF_DAY), endCalendar.get(Calendar.MINUTE),
-                        true).show(getFragmentManager(), "timePicker");
-                DatePickerDialog.newInstance(this,
-                        endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
-                        endCalendar.get(Calendar.DAY_OF_MONTH)).
-                        show(getFragmentManager(), "datePicker");
+//                TimePickerDialog.newInstance(this,
+//                        endCalendar.get(Calendar.HOUR_OF_DAY), endCalendar.get(Calendar.MINUTE),
+//                        true).show(getFragmentManager(), "timePicker");
+//                DatePickerDialog.newInstance(this,
+//                        endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
+//                        endCalendar.get(Calendar.DAY_OF_MONTH)).
+//                        show(getFragmentManager(), "datePicker");
                 break;
         }
     }
 
+    // Use only if MainActivity is implementing Listeners
 //    @Override
 //    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
 //        startCalendar.set(year, monthOfYear, dayOfMonth);
