@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.android.datetimepicker.date.DatePickerDialog;
-import com.android.datetimepicker.time.RadialPickerLayout;
 import com.android.datetimepicker.time.TimePickerDialog;
 
 import java.text.DateFormat;
@@ -19,24 +19,28 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements
-        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
+        View.OnClickListener{
 
     private static final String TIME_PATTERN = "HH:mm";
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private TextView dateView;
     private TextView timeView;
-    private Calendar startCalendar;
+    public Calendar startCalendar;
     private Calendar endCalendar;
     private DateFormat dateFormat;
     private SimpleDateFormat simpleDateFormat;
     private String queryFormatDate;
 
+    public int mYear;
+    public int mMonth;
+    public int mDay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         startCalendar = Calendar.getInstance();
         endCalendar = Calendar.getInstance();
@@ -110,6 +114,20 @@ public class MainActivity extends AppCompatActivity implements
         switch (v.getId()) {
             // Bring up Date Picker and Time Picker Dialog to set time and date
             case R.id.btnDatePickerStart:
+
+                mYear = startCalendar.get(Calendar.YEAR);
+                mMonth = startCalendar.get(Calendar.MONTH);
+                mDay = startCalendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                        new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+
+                    }
+                }, mYear, mMonth, mDay);
+
+                //TODO: Use separate instances of DatePickerDialog to set different calendars
                 TimePickerDialog.newInstance(this,
                         startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
                         true).show(getFragmentManager(), "timePicker");
@@ -117,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements
                         startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
                         startCalendar.get(Calendar.DAY_OF_MONTH)).
                         show(getFragmentManager(), "datePicker");
+
                 break;
             case R.id.btnDatePickerEnd:
                 TimePickerDialog.newInstance(this,
@@ -130,19 +149,19 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-        startCalendar.set(year, monthOfYear, dayOfMonth);
-        // TODO: Need to find a way to set both calendars without overriding the other
-        update();
-    }
-
-    @Override
-    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        startCalendar.set(Calendar.MINUTE, minute);
-        update();
-    }
+//    @Override
+//    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+//        startCalendar.set(year, monthOfYear, dayOfMonth);
+//        // TODO: Need to find a way to set both calendars without overriding the other
+//        update();
+//    }
+//
+//    @Override
+//    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+//        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//        startCalendar.set(Calendar.MINUTE, minute);
+//        update();
+//    }
 
 
 }
