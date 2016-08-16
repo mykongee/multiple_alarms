@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.datetimepicker.date.DatePickerDialog;
+import com.android.datetimepicker.time.RadialPickerLayout;
+import com.android.datetimepicker.time.TimePickerDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity{
     public int mYear;
     public int mMonth;
     public int mDay;
+    public int mHour;
+    public int mMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,15 +120,25 @@ public class MainActivity extends AppCompatActivity{
                 mYear = startCalendar.get(Calendar.YEAR);
                 mMonth = startCalendar.get(Calendar.MONTH);
                 mDay = startCalendar.get(Calendar.DAY_OF_MONTH);
+                mHour = startCalendar.get(Calendar.HOUR);
+                mMinute = startCalendar.get(Calendar.MINUTE);
 
                 DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                         new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-
+                        startCalendar.set(year, monthOfYear, dayOfMonth);
+                        update();
                     }
                 }, mYear, mMonth, mDay);
 
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                                update();
+                            }
+                        }, mHour, mMinute, true);
                 //TODO: Use separate instances of DatePickerDialog to set different calendars
 //                TimePickerDialog.newInstance(this,
 //                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
