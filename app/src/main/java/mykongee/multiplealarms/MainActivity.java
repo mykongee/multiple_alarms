@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        update();
+        updateStartCalendarView();
 
     }
 
@@ -107,9 +107,13 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void update() {
+    private void updateStartCalendarView() {
         dateView.setText(dateFormat.format(startCalendar.getTime()));
         timeView.setText(simpleDateFormat.format(startCalendar.getTime()));
+    }
+
+    private void updateEndCalendarView(){
+
     }
 
     public void onClick(View v){
@@ -123,40 +127,48 @@ public class MainActivity extends AppCompatActivity{
                 mHour = startCalendar.get(Calendar.HOUR);
                 mMinute = startCalendar.get(Calendar.MINUTE);
 
-                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                DatePickerDialog datePickerDialogStart = DatePickerDialog.newInstance(
                         new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
                         startCalendar.set(year, monthOfYear, dayOfMonth);
-                        update();
+                        updateStartCalendarView();
                     }
                 }, mYear, mMonth, mDay);
 
-                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(
+                TimePickerDialog timePickerDialogStart = TimePickerDialog.newInstance(
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
-                                update();
+                                startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                startCalendar.set(Calendar.MINUTE, minute);
+                                updateStartCalendarView();
                             }
                         }, mHour, mMinute, true);
-                //TODO: Use separate instances of DatePickerDialog to set different calendars
-//                TimePickerDialog.newInstance(this,
-//                        startCalendar.get(Calendar.HOUR_OF_DAY), startCalendar.get(Calendar.MINUTE),
-//                        true).show(getFragmentManager(), "timePicker");
-//                DatePickerDialog.newInstance(this,
-//                        startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
-//                        startCalendar.get(Calendar.DAY_OF_MONTH)).
-//                        show(getFragmentManager(), "datePicker");
 
                 break;
             case R.id.btnDatePickerEnd:
-//                TimePickerDialog.newInstance(this,
-//                        endCalendar.get(Calendar.HOUR_OF_DAY), endCalendar.get(Calendar.MINUTE),
-//                        true).show(getFragmentManager(), "timePicker");
-//                DatePickerDialog.newInstance(this,
-//                        endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
-//                        endCalendar.get(Calendar.DAY_OF_MONTH)).
-//                        show(getFragmentManager(), "datePicker");
+
+                DatePickerDialog datePickerDialogEnd = DatePickerDialog.newInstance(
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+                                endCalendar.set(year, monthOfYear, dayOfMonth);
+                                updateEndCalendarView();
+                            }
+                        }, mYear, mMonth, mDay);
+
+                TimePickerDialog timePickerDialogEnd = TimePickerDialog.newInstance(
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                                endCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                endCalendar.set(Calendar.MINUTE, minute);
+                                updateEndCalendarView();
+                            }
+                        }, mHour, mMinute, true);
+
+
                 break;
         }
     }
@@ -166,14 +178,14 @@ public class MainActivity extends AppCompatActivity{
 //    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
 //        startCalendar.set(year, monthOfYear, dayOfMonth);
 //        // TODO: Need to find a way to set both calendars without overriding the other
-//        update();
+//        updateStartCalendarView();
 //    }
 //
 //    @Override
 //    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
 //        startCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 //        startCalendar.set(Calendar.MINUTE, minute);
-//        update();
+//        updateStartCalendarView();
 //    }
 
 
