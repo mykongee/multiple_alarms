@@ -27,17 +27,16 @@ public class MainActivity extends AppCompatActivity{
 
     private TextView dateView;
     private TextView timeView;
-    public Calendar startCalendar;
+    private Calendar startCalendar;
     private Calendar endCalendar;
     private DateFormat dateFormat;
     private SimpleDateFormat simpleDateFormat;
-    private String queryFormatDate;
 
-    public int mYear;
-    public int mMonth;
-    public int mDay;
-    public int mHour;
-    public int mMinute;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private int mHour;
+    private int mMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public void onClick(View v){
+    public void onClick(View v) {
         switch (v.getId()) {
             // Bring up Date Picker and Time Picker Dialog to set time and date
             case R.id.btnDatePickerStart:
@@ -127,15 +126,6 @@ public class MainActivity extends AppCompatActivity{
                 mHour = startCalendar.get(Calendar.HOUR);
                 mMinute = startCalendar.get(Calendar.MINUTE);
 
-                DatePickerDialog datePickerDialogStart = DatePickerDialog.newInstance(
-                        new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-                        startCalendar.set(year, monthOfYear, dayOfMonth);
-                        updateStartCalendarView();
-                    }
-                }, mYear, mMonth, mDay);
-
                 TimePickerDialog timePickerDialogStart = TimePickerDialog.newInstance(
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
@@ -145,6 +135,19 @@ public class MainActivity extends AppCompatActivity{
                                 updateStartCalendarView();
                             }
                         }, mHour, mMinute, true);
+                timePickerDialogStart.show(getFragmentManager(), "timePicker");
+                
+                DatePickerDialog datePickerDialogStart = DatePickerDialog.newInstance(
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+                                startCalendar.set(year, monthOfYear, dayOfMonth);
+                                updateStartCalendarView();
+                            }
+                        }, mYear, mMonth, mDay);
+
+                datePickerDialogStart.show(getFragmentManager(), "datePicker");
+
 
                 break;
             case R.id.btnDatePickerEnd:
@@ -187,6 +190,7 @@ public class MainActivity extends AppCompatActivity{
 //        startCalendar.set(Calendar.MINUTE, minute);
 //        updateStartCalendarView();
 //    }
+
 
 
 }
