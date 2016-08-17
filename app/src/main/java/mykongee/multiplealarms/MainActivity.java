@@ -25,8 +25,10 @@ public class MainActivity extends AppCompatActivity{
     private static final String TIME_PATTERN = "HH:mm";
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private TextView dateView;
-    private TextView timeView;
+    private TextView startDateView;
+    private TextView startTimeView;
+    private TextView endDateView;
+    private TextView endTimeView;
     private Calendar startCalendar;
     private Calendar endCalendar;
     private DateFormat dateFormat;
@@ -52,8 +54,11 @@ public class MainActivity extends AppCompatActivity{
         // Initialize these values as current date and time
         // To prevent error with empty query parameters
 
-        dateView = (TextView) findViewById(R.id.lblDate);
-        timeView = (TextView) findViewById(R.id.lblTime);
+        startDateView = (TextView) findViewById(R.id.lblStartDate);
+        startTimeView = (TextView) findViewById(R.id.lblStartTime);
+        endDateView = (TextView) findViewById(R.id.lblEndDate);
+        endTimeView = (TextView) findViewById(R.id.lblEndTime);
+
         Button alarmButton = (Button) findViewById(R.id.btnAlarm);
 
         // Set an alarm with the main alarm app.
@@ -107,12 +112,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void updateStartCalendarView() {
-        dateView.setText(dateFormat.format(startCalendar.getTime()));
-        timeView.setText(simpleDateFormat.format(startCalendar.getTime()));
+        startDateView.setText(dateFormat.format(startCalendar.getTime()));
+        startTimeView.setText(simpleDateFormat.format(startCalendar.getTime()));
     }
 
     private void updateEndCalendarView(){
-
+        endDateView.setText(dateFormat.format(endCalendar.getTime()));
+        endTimeView.setText(dateFormat.format(endCalendar.getTime()));
     }
 
     public void onClick(View v) {
@@ -152,15 +158,6 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case R.id.btnDatePickerEnd:
 
-                DatePickerDialog datePickerDialogEnd = DatePickerDialog.newInstance(
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-                                endCalendar.set(year, monthOfYear, dayOfMonth);
-                                updateEndCalendarView();
-                            }
-                        }, mYear, mMonth, mDay);
-
                 TimePickerDialog timePickerDialogEnd = TimePickerDialog.newInstance(
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
@@ -171,6 +168,18 @@ public class MainActivity extends AppCompatActivity{
                             }
                         }, mHour, mMinute, true);
 
+                timePickerDialogEnd.show(getFragmentManager(), "timePicker");
+
+                DatePickerDialog datePickerDialogEnd = DatePickerDialog.newInstance(
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+                                endCalendar.set(year, monthOfYear, dayOfMonth);
+                                updateEndCalendarView();
+                            }
+                        }, mYear, mMonth, mDay);
+
+                datePickerDialogEnd.show(getFragmentManager(), "datePicker");
 
                 break;
         }

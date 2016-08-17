@@ -10,13 +10,58 @@
     android:background="#03A9F4"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblDate"
-        style="@style/DTP.Label"/>
+    <LinearLayout
+        android:id="@+id/time_displays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="#03A9F4"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#03A9F4"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/lblStartDate"
+                style="@style/DTP.Label"/>
 
-    <TextView
-        android:id="@+id/lblTime"
-        style="@style/DTP.Label"/>
+            <TextView
+                android:id="@+id/lblStartTime"
+                style="@style/DTP.Label"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#03A9F4"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/lblEndDate"
+                style="@style/DTP.Label"/>
+
+            <TextView
+                android:id="@+id/lblEndTime"
+                style="@style/DTP.Label"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/lblDate"-->
+        <!--style="@style/DTP.Label"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/lblTime"-->
+        <!--style="@style/DTP.Label"/>-->
 
     <Button
         android:id="@+id/btnDatePickerStart"
