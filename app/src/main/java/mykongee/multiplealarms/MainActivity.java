@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity{
                                 startCalendar.set(Calendar.MINUTE, minute);
                                 updateStartCalendarView();
                             }
-                        }, mHour, mMinute, true);
+                        }, mHour, mMinute, false);
                 timePickerDialogStart.show(getFragmentManager(), "timePicker");
-                
+
                 DatePickerDialog datePickerDialogStart = DatePickerDialog.newInstance(
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
