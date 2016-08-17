@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
         updateStartCalendarView();
+        updateEndCalendarView();
 
     }
 
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void updateEndCalendarView(){
         endDateView.setText(dateFormat.format(endCalendar.getTime()));
-        endTimeView.setText(dateFormat.format(endCalendar.getTime()));
+        endTimeView.setText(simpleDateFormat.format(endCalendar.getTime()));
     }
 
     public void onClick(View v) {
