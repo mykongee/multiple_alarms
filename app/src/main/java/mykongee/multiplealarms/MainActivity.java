@@ -123,15 +123,16 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void onClick(View v) {
+
+        mYear = startCalendar.get(Calendar.YEAR);
+        mMonth = startCalendar.get(Calendar.MONTH);
+        mDay = startCalendar.get(Calendar.DAY_OF_MONTH);
+        mHour = startCalendar.get(Calendar.HOUR);
+        mMinute = startCalendar.get(Calendar.MINUTE);
+
         switch (v.getId()) {
             // Bring up Date Picker and Time Picker Dialog to set time and date
             case R.id.btnDatePickerStart:
-
-                mYear = startCalendar.get(Calendar.YEAR);
-                mMonth = startCalendar.get(Calendar.MONTH);
-                mDay = startCalendar.get(Calendar.DAY_OF_MONTH);
-                mHour = startCalendar.get(Calendar.HOUR);
-                mMinute = startCalendar.get(Calendar.MINUTE);
 
                 TimePickerDialog timePickerDialogStart = TimePickerDialog.newInstance(
                         new TimePickerDialog.OnTimeSetListener() {
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity{
                                 updateStartCalendarView();
                             }
                         }, mHour, mMinute, false);
+
                 timePickerDialogStart.show(getFragmentManager(), "timePicker");
 
                 DatePickerDialog datePickerDialogStart = DatePickerDialog.newInstance(
