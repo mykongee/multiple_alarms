@@ -6,5 +6,6 @@
     <string name="time_picker_start">Set Lower Interval</string>
     <string name="time_picker_end">Set Upper Interval</string>
     <string name="alarm">Set Alarms</string>
+    <string name="through">Through</string>
 
 </resources>

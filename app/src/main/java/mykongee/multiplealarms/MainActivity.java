@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
 //                intent.putExtra(AlarmClock.EXTRA_HOUR, 23);
 //                intent.putExtra(AlarmClock.EXTRA_MINUTES, 53);
 //                startActivity(intent);
-//                sendAlarm();
+                sendAlarm();
                 Log.v("Calendar date: ", startCalendar.getTime().toString());
                 Log.v("Calendar time: ", Long.toString(startCalendar.getTimeInMillis()));
             }
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void sendAlarm(){
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(AlarmClock.ACTION_SET_ALARM);
         intent.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
         intent.putExtra(AlarmClock.EXTRA_HOUR, 5);
@@ -92,14 +92,45 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
         Log.d(LOG_TAG, "First intent sent");
 
-        // Intent intent2 = new Intent();
-        // intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        // intent2.setAction(AlarmClock.ACTION_SET_ALARM);
-        // intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
-        // intent2.putExtra(AlarmClock.EXTRA_HOUR, 6);
-        // intent2.putExtra(AlarmClock.EXTRA_MINUTES, 5);
-        // startActivity(intent2);
-        // Log.d(LOG_TAG, "After second intent's startActivity()");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Intent intent2 = new Intent();
+        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent2.setAction(AlarmClock.ACTION_SET_ALARM);
+        intent2.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        intent2.putExtra(AlarmClock.EXTRA_HOUR, 6);
+        intent2.putExtra(AlarmClock.EXTRA_MINUTES, 5);
+        startActivity(intent2);
+        Log.d(LOG_TAG, "After second intent's startActivity()");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Intent intent3 = new Intent();
+        intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent3.setAction(AlarmClock.ACTION_SET_ALARM);
+        intent3.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+        intent3.putExtra(AlarmClock.EXTRA_HOUR, 6);
+        intent3.putExtra(AlarmClock.EXTRA_MINUTES, 15);
+        startActivity(intent3);
+        Log.d(LOG_TAG, "After third intent's startActivity()");
+
+//        Intent intent4 = new Intent();
+//        intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent4.setAction(AlarmClock.ACTION_SET_ALARM);
+//        intent4.putExtra(AlarmClock.EXTRA_SKIP_UI, true);
+//        intent4.putExtra(AlarmClock.EXTRA_HOUR, 7);
+//        intent4.putExtra(AlarmClock.EXTRA_MINUTES, 1);
+//        startActivity(intent4);
+//        Log.d(LOG_TAG, "After fourth intent's startActivity()");
     }
 
     private void setAlarms(int numberofAlarms, int startDate, int endDate, int startTime,
@@ -202,7 +233,5 @@ public class MainActivity extends AppCompatActivity{
 //        startCalendar.set(Calendar.MINUTE, minute);
 //        updateStartCalendarView();
 //    }
-
-
 
 }
